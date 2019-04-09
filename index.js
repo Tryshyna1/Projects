@@ -1,11 +1,18 @@
-const http = require('http');
-const PORT = process.env.PORT || 5000;
+var express = require('express');
+var chalk = require('chalk');
+var app = express();
+var router = express.Router();
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World\n');
+router.get('/test', function(req, res) {
+    res.status(200).send('Hello world');
 });
-server.listen(PORT, () => {
-  console.log(`Server running on ${PORT}/`);
+
+app.use('/api', router);
+
+app.listen(8081, function(err) {
+    if (err) {
+        console.log(chalk.red(err));
+    } else {
+        console.log(chalk.blue('Magic Happens on Port 69'));
+    }
 });
